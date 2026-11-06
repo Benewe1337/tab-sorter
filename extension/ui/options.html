@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tab Sorter</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="side">
+      <h1 class="wordmark">Tab<br><em>Sorter</em></h1>
+      <p class="lede" data-i18n="lede"></p>
+
+      <section class="panel" aria-labelledby="h-behaviour">
+        <h2 id="h-behaviour" data-i18n="behaviour"></h2>
+        <label class="switch"><span data-i18n="settingActive"></span><input type="checkbox" id="set-active"></label>
+        <label class="field">
+          <span data-i18n="settingInterval"></span>
+          <select id="set-interval"></select>
+        </label>
+        <label class="switch"><span data-i18n="settingNavigate"></span><input type="checkbox" id="set-navigate"></label>
+        <label class="switch"><span data-i18n="settingRespect"></span><input type="checkbox" id="set-respect"></label>
+        <div class="sort-row">
+          <button id="sort-now" class="btn btn-primary" data-i18n="sortNow"></button>
+          <output id="sort-result" class="quiet" aria-live="polite"></output>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="h-probe">
+        <h2 id="h-probe" data-i18n="probeHeading"></h2>
+        <input id="probe-url" class="text mono" type="text" data-i18n-placeholder="probeUrl" data-i18n-aria="probeUrl" spellcheck="false">
+        <input id="probe-title" class="text" type="text" data-i18n-placeholder="probeTitle" data-i18n-aria="probeTitle">
+        <output id="probe-result" class="probe-result" aria-live="polite"></output>
+      </section>
+
+      <section class="panel" aria-labelledby="h-syntax">
+        <h2 id="h-syntax" data-i18n="syntaxHeading"></h2>
+        <dl class="syntax">
+          <dt><code>example.com</code></dt><dd data-i18n="syntaxDomain"></dd>
+          <dt><code>github.com/acme</code></dt><dd data-i18n="syntaxPath"></dd>
+          <dt><code>title:Invoice</code></dt><dd data-i18n="syntaxTitle"></dd>
+          <dt><code>title:/a|b/</code></dt><dd data-i18n="syntaxTitleRegex"></dd>
+          <dt><code>/docs\.google/</code></dt><dd data-i18n="syntaxRegex"></dd>
+          <dt><code>file://</code></dt><dd data-i18n="syntaxPrefix"></dd>
+          <dt><code>x.com &amp; title:A</code></dt><dd data-i18n="syntaxCombo"></dd>
+        </dl>
+      </section>
+
+      <section class="panel" aria-labelledby="h-backup">
+        <h2 id="h-backup" data-i18n="backupHeading"></h2>
+        <div class="row">
+          <button id="export" class="btn" data-i18n="export"></button>
+          <label class="btn" for="import-file"><span data-i18n="import"></span></label>
+          <input id="import-file" type="file" accept="application/json,.json" class="sr-only">
+        </div>
+        <output id="import-result" class="quiet" aria-live="polite"></output>
+      </section>
+    </aside>
+
+    <main class="main">
+      <header class="main-head">
+        <h2 class="main-title" data-i18n="groupsHeading"></h2>
+        <p class="quiet" data-i18n="groupsHint"></p>
+        <span id="save-state" class="save-state" aria-live="polite"></span>
+      </header>
+
+      <ol id="groups" class="drawers"></ol>
+
+      <section id="empty" class="empty" hidden>
+        <p class="empty-title" data-i18n="emptyTitle"></p>
+        <p class="quiet" data-i18n="emptyText"></p>
+        <div class="row" id="preset-buttons"></div>
+      </section>
+
+      <button id="add-group" class="add-drawer" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        <span data-i18n="addGroup"></span>
+      </button>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden>
+    <span class="toast-text"></span>
+    <button class="btn" type="button" data-i18n="undo"></button>
+  </div>
+
+  <template id="tpl-drawer">
+    <li class="drawer">
+      <span class="ord" aria-hidden="true"></span>
+      <div class="drawer-tab">
+        <input class="title" data-role="title" maxlength="60" spellcheck="false" data-i18n-aria="groupName">
+      </div>
+      <div class="drawer-body">
+        <div class="drawer-tools">
+          <fieldset class="swatches"><legend class="sr-only" data-i18n="color"></legend></fieldset>
+          <div class="tool-buttons">
+            <button class="icon-btn" data-role="up" type="button" data-i18n-aria="moveUp" data-i18n-title="moveUp">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="icon-btn" data-role="down" type="button" data-i18n-aria="moveDown" data-i18n-title="moveDown">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="icon-btn danger" data-role="delete" type="button" data-i18n-aria="deleteGroup" data-i18n-title="deleteGroup">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M10 11v6M14 11v6M7 7l1 12h8l1-12M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <ul class="chips" data-role="chips"></ul>
+        <div class="adder">
+          <input class="text mono" data-role="pattern" type="text" spellcheck="false" autocomplete="off" data-i18n-placeholder="patternPlaceholder" data-i18n-aria="patternPlaceholder">
+          <button class="btn" data-role="add" type="button" data-i18n="add"></button>
+        </div>
+        <p class="adder-hint" data-role="hint" aria-live="polite"></p>
+        <details class="hits" data-role="hits"><summary></summary><ul></ul></details>
+      </div>
+    </li>
+  </template>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

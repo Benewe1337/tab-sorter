@@ -1,0 +1,15 @@
+{
+  "name": "tab-sorter",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Chromium extension that files tabs into tab groups by your own domain, path and title rules",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "test:e2e": "node test/e2e.mjs"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  }
+}

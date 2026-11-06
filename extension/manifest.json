@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "version": "2.0.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn+nLh3sCVjb4juBrLDlNVHfx1vsNd8MuWg/CMM+92dQzWU5l7PWQVqXQoX1BRCT+ocdnw7zuA5nyc45P+y/kDvHb8FWpxBdcK2p/77X4QBaQK7YhPtpBvbbikgc/miBwgT1oPdiMxXBvhnxr71NSNeqNApeQSfDNCynYizrN6DtD1f7dWOur2GjIH22thRUNP1pZTUUdrDLpNFG+ODJcdoJtY/qocXJ3ZvdkQ1kEmlXRNYauIUdr/x0MC/RKsZrvugia4Cdm/22Bhfbqgkx9mrbSi/O/MbjOio0QDXsVq9GGF2pOeNscR5/viAUo8cnRzRxBeyyaH75RCJMZF0h59QIDAQAB",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "tabs",
+    "tabGroups",
+    "alarms",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "__MSG_actionTitle__",
+    "default_popup": "ui/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "options_ui": {
+    "page": "ui/options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "sort-tabs": {
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "mac": "Alt+Shift+S"
+      },
+      "description": "__MSG_cmdSort__"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}

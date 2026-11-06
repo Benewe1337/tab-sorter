@@ -1,0 +1,263 @@
+{
+  "extName": {
+    "message": "Tab Sorter"
+  },
+  "extDescription": {
+    "message": "Files your tabs into tab groups by your own domain, path and title rules."
+  },
+  "actionTitle": {
+    "message": "Tab Sorter"
+  },
+  "cmdSort": {
+    "message": "Sort tabs now"
+  },
+  "lede": {
+    "message": "New tabs land wherever you open them. Tab Sorter files them into the right group: by domain, path or title."
+  },
+  "behaviour": {
+    "message": "Behaviour"
+  },
+  "settingActive": {
+    "message": "Sort automatically"
+  },
+  "settingInterval": {
+    "message": "Every"
+  },
+  "settingNavigate": {
+    "message": "When a page loads"
+  },
+  "settingRespect": {
+    "message": "Leave tabs I took out alone"
+  },
+  "sortNow": {
+    "message": "Sort now"
+  },
+  "probeHeading": {
+    "message": "Try a URL"
+  },
+  "probeUrl": {
+    "message": "Paste a URL"
+  },
+  "probeTitle": {
+    "message": "Tab title (optional)"
+  },
+  "probeVia": {
+    "message": "via"
+  },
+  "probeNoMatch": {
+    "message": "No group. The tab stays where it is."
+  },
+  "syntaxHeading": {
+    "message": "Patterns"
+  },
+  "syntaxDomain": {
+    "message": "domain incl. subdomains"
+  },
+  "syntaxPath": {
+    "message": "domain + path prefix"
+  },
+  "syntaxTitle": {
+    "message": "title contains text"
+  },
+  "syntaxTitleRegex": {
+    "message": "title regex"
+  },
+  "syntaxRegex": {
+    "message": "URL regex"
+  },
+  "syntaxPrefix": {
+    "message": "URL starts with"
+  },
+  "syntaxCombo": {
+    "message": "both must match"
+  },
+  "backupHeading": {
+    "message": "Backup"
+  },
+  "export": {
+    "message": "Export"
+  },
+  "import": {
+    "message": "Import"
+  },
+  "importNotJson": {
+    "message": "That file is not JSON."
+  },
+  "importFailed": {
+    "message": "Import failed: $1"
+  },
+  "importDone": {
+    "message": "Groups imported: $1"
+  },
+  "importWarnings": {
+    "message": "Invalid patterns ignored: $1, e.g. $2"
+  },
+  "groupsHeading": {
+    "message": "Groups"
+  },
+  "groupsHint": {
+    "message": "Order is priority: the first matching group wins."
+  },
+  "saving": {
+    "message": "saving…"
+  },
+  "saved": {
+    "message": "saved"
+  },
+  "emptyTitle": {
+    "message": "Nothing to file into yet."
+  },
+  "emptyText": {
+    "message": "Start with a preset and adjust it, or create your first group below."
+  },
+  "presetStarter": {
+    "message": "Starter: Code, Docs, Mail, Video"
+  },
+  "presetEveryday": {
+    "message": "Everyday: Shopping, Social, News, Travel"
+  },
+  "presetLoaded": {
+    "message": "Loaded: $1"
+  },
+  "addGroup": {
+    "message": "New group"
+  },
+  "newGroupName": {
+    "message": "New group"
+  },
+  "undo": {
+    "message": "Undo"
+  },
+  "groupName": {
+    "message": "Group name"
+  },
+  "color": {
+    "message": "Color"
+  },
+  "moveUp": {
+    "message": "Higher priority"
+  },
+  "moveDown": {
+    "message": "Lower priority"
+  },
+  "deleteGroup": {
+    "message": "Delete group"
+  },
+  "groupDeleted": {
+    "message": "Deleted “$1”"
+  },
+  "patternPlaceholder": {
+    "message": "Domain, path, title:… or /regex/"
+  },
+  "add": {
+    "message": "Add"
+  },
+  "editPattern": {
+    "message": "Click to edit"
+  },
+  "removePattern": {
+    "message": "Remove $1"
+  },
+  "patternRemoved": {
+    "message": "Removed $1"
+  },
+  "invalidPattern": {
+    "message": "Invalid: $1"
+  },
+  "draftOk": {
+    "message": "$1 · open tabs matching: $2"
+  },
+  "duplicatePattern": {
+    "message": "Already in this group"
+  },
+  "tooManyPatterns": {
+    "message": "At most $1 patterns per group"
+  },
+  "hitsSummary": {
+    "message": "Open tabs that belong here: $1"
+  },
+  "kind_domain": {
+    "message": "domain"
+  },
+  "kind_path": {
+    "message": "path"
+  },
+  "kind_title": {
+    "message": "title"
+  },
+  "kind_regex": {
+    "message": "regex"
+  },
+  "kind_prefix": {
+    "message": "prefix"
+  },
+  "kind_combo": {
+    "message": "combo"
+  },
+  "kind_invalid": {
+    "message": "invalid"
+  },
+  "color_grey": {
+    "message": "Grey"
+  },
+  "color_blue": {
+    "message": "Blue"
+  },
+  "color_red": {
+    "message": "Red"
+  },
+  "color_yellow": {
+    "message": "Yellow"
+  },
+  "color_green": {
+    "message": "Green"
+  },
+  "color_pink": {
+    "message": "Pink"
+  },
+  "color_purple": {
+    "message": "Purple"
+  },
+  "color_cyan": {
+    "message": "Cyan"
+  },
+  "color_orange": {
+    "message": "Orange"
+  },
+  "intervalOff": {
+    "message": "never (only on load)"
+  },
+  "intervalMinutes": {
+    "message": "$1 min"
+  },
+  "sortedCount": {
+    "message": "Filed: $1"
+  },
+  "sortFailed": {
+    "message": "Failed: $1"
+  },
+  "popupNoGroups": {
+    "message": "No groups yet. Set them up in the rules."
+  },
+  "popupPaused": {
+    "message": "Paused. Nothing moves until you switch it back on."
+  },
+  "popupWaiting": {
+    "message": "tabs waiting for their group"
+  },
+  "popupWaitingOne": {
+    "message": "tab waiting for its group"
+  },
+  "popupAllSorted": {
+    "message": "Everything is where it belongs."
+  },
+  "lastRun": {
+    "message": "Last run $1 · moved: $2"
+  },
+  "editRules": {
+    "message": "Edit rules"
+  },
+  "runPageSorting": {
+    "message": "Sorting tabs…"
+  }
+}

@@ -1,0 +1,70 @@
+#!/bin/zsh
+# Sorts tabs into their groups right now (macOS, needs the Tab Sorter extension).
+# Opens the extension's run page in the front window; the page sorts and closes itself.
+#
+# Uses the first running browser from SUPPORTED, or the one named in
+# TAB_SORTER_BROWSER (e.g. TAB_SORTER_BROWSER="Google Chrome" sort-tabs).
+set -euo pipefail
+
+EXTENSION_ID="caijclkncckacdfoedpobdbopbaeomda"
+RUN_URL="chrome-extension://${EXTENSION_ID}/run.html"
+SUPPORTED=("Brave Browser" "Google Chrome" "Microsoft Edge" "Chromium" "Vivaldi" "Comet")
+
+pick_browser() {
+  if [[ -n "${TAB_SORTER_BROWSER:-}" ]]; then
+    # only names from the list: they are inlined into AppleScript below
+    if (( ! ${SUPPORTED[(Ie)$TAB_SORTER_BROWSER]} )); then
+      echo "sort-tabs: unsupported browser \"$TAB_SORTER_BROWSER\" (supported: ${(j:, :)SUPPORTED})" >&2
+      exit 2
+    fi
+    echo "$TAB_SORTER_BROWSER"
+    return
+  fi
+  for name in "${SUPPORTED[@]}"; do
+    if pgrep -xq "$name"; then
+      echo "$name"
+      return
+    fi
+  done
+  echo "sort-tabs: no supported browser is running (${(j:, :)SUPPORTED})" >&2
+  exit 1
+}
+
+BROWSER="$(pick_browser)"
+if ! pgrep -xq "$BROWSER"; then
+  echo "sort-tabs: $BROWSER is not running." >&2
+  exit 1
+fi
+
+osascript - "$RUN_URL" <<APPLESCRIPT
+on run argv
+  set runUrl to item 1 of argv
+  tell application "$BROWSER"
+    if (count of windows) = 0 then make new window
+    tell front window to make new tab with properties {URL:runUrl}
+  end tell
+end run
+APPLESCRIPT
+
+# The page closes itself after sorting; if it is still open, the extension is missing.
+sleep 3
+still_open=$(osascript - "$RUN_URL" <<APPLESCRIPT
+on run argv
+  set runUrl to item 1 of argv
+  tell application "$BROWSER"
+    repeat with w in windows
+      repeat with t in tabs of w
+        if (URL of t) starts with runUrl then return (title of t)
+      end repeat
+    end repeat
+  end tell
+  return ""
+end run
+APPLESCRIPT
+)
+
+if [[ -n "$still_open" ]]; then
+  echo "sort-tabs: the page stayed open ($still_open). Is the extension loaded in $BROWSER? See README." >&2
+  exit 1
+fi
+echo "Tabs sorted ($BROWSER)."

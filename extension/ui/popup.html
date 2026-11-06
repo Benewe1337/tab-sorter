@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tab Sorter</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <p class="wordmark">Tab <em>Sorter</em></p>
+    <label class="switch compact">
+      <span class="sr-only" data-i18n="settingActive"></span>
+      <input type="checkbox" id="active" data-i18n-aria="settingActive">
+    </label>
+  </header>
+
+  <section class="status" aria-live="polite">
+    <p class="count" id="count">–</p>
+    <p class="count-label" id="count-label"></p>
+  </section>
+
+  <ul class="breakdown" id="breakdown"></ul>
+
+  <button id="sort" class="btn btn-primary wide" data-i18n="sortNow"></button>
+  <p id="result" class="result" aria-live="polite"></p>
+
+  <footer class="foot">
+    <span id="last-run" class="quiet"></span>
+    <button id="open-options" class="btn btn-ghost" data-i18n="editRules"></button>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

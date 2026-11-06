@@ -1,0 +1,211 @@
+/* Shared tokens, fonts and primitives for options page and popup. See Design.md. */
+@font-face {
+  font-family: 'Bricolage';
+  src: url('../fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark light;
+  --paper: #14110e;
+  --paper-2: #1d1915;
+  --paper-3: #29231d;
+  --ink: #efe7da;
+  --ink-2: #b5aa99;
+  --ink-3: #82786b;
+  --line: #3a322a;
+  --signal: #ec8a43;
+  --signal-ink: #1a0f06;
+  --danger: #e5694f;
+  --ok: #8fc98a;
+
+  --g-grey: #a8adb3;
+  --g-blue: #8ab4f8;
+  --g-red: #f28b82;
+  --g-yellow: #fdd663;
+  --g-green: #81c995;
+  --g-pink: #ff8bcb;
+  --g-purple: #c58af9;
+  --g-cyan: #78d9ec;
+  --g-orange: #fcad70;
+  --g-ink: #16130f;
+
+  --font-ui: 'Bricolage', 'Avenir Next', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --r-s: 6px;
+  --r-m: 10px;
+  --r-l: 16px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --paper: #f2ece1;
+    --paper-2: #fbf8f2;
+    --paper-3: #e9e1d3;
+    --ink: #1d1813;
+    --ink-2: #5a5045;
+    --ink-3: #857a6c;
+    --line: #d8cdbb;
+    --signal: #b9541a;
+    --signal-ink: #fff8f0;
+    --danger: #b3261e;
+    --ok: #2f6b2c;
+
+    --g-grey: #5f6368;
+    --g-blue: #1a73e8;
+    --g-red: #d93025;
+    --g-yellow: #e8a200;
+    --g-green: #188038;
+    --g-pink: #d01884;
+    --g-purple: #a142f4;
+    --g-cyan: #007b83;
+    --g-orange: #e8710a;
+    --g-ink: #ffffff;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* component display rules must never beat the hidden attribute */
+[hidden] { display: none !important; }
+
+html { background: var(--paper); }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font: 400 14px/1.45 var(--font-ui);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 100;
+}
+
+code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
+
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: var(--r-s); }
+
+.wordmark {
+  font-weight: 760;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+}
+.wordmark em { font-style: normal; color: var(--signal); }
+
+/* group color mapping: set data-color on any element, use var(--g) */
+[data-color='grey'] { --g: var(--g-grey); }
+[data-color='blue'] { --g: var(--g-blue); }
+[data-color='red'] { --g: var(--g-red); }
+[data-color='yellow'] { --g: var(--g-yellow); }
+[data-color='green'] { --g: var(--g-green); }
+[data-color='pink'] { --g: var(--g-pink); }
+[data-color='purple'] { --g: var(--g-purple); }
+[data-color='cyan'] { --g: var(--g-cyan); }
+[data-color='orange'] { --g: var(--g-orange); }
+
+/* buttons */
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--paper-3);
+  color: var(--ink);
+  font: 560 13px/1 var(--font-ui);
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: var(--r-m);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 120ms var(--ease), border-color 120ms var(--ease), transform 120ms var(--ease);
+}
+.btn:hover { border-color: var(--ink-3); }
+.btn:active { transform: translateY(1px); }
+.btn[disabled] { opacity: 0.45; cursor: default; }
+
+.btn-primary {
+  background: var(--signal);
+  border-color: transparent;
+  color: var(--signal-ink);
+  font-weight: 680;
+}
+.btn-primary:hover { border-color: transparent; filter: brightness(1.07); }
+
+.btn-ghost { background: transparent; border-color: transparent; color: var(--ink-2); }
+.btn-ghost:hover { color: var(--ink); border-color: var(--line); }
+
+.icon-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink-3);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-s);
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+}
+.icon-btn:hover { color: var(--ink); background: var(--paper-3); }
+.icon-btn.danger:hover { color: var(--danger); }
+.icon-btn[disabled] { opacity: 0.3; cursor: default; background: transparent; }
+.icon-btn svg { width: 18px; height: 18px; }
+
+/* switch */
+.switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; min-height: 36px; }
+.switch input { appearance: none; margin: 0; flex: none; width: 38px; height: 22px; border-radius: 22px; background: var(--paper-3); border: 1px solid var(--line); position: relative; cursor: pointer; transition: background 140ms var(--ease); }
+.switch input::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--ink-3); transition: translate 160ms var(--ease), background 160ms var(--ease); }
+.switch input:checked { background: var(--signal); border-color: transparent; }
+.switch input:checked::after { translate: 16px 0; background: var(--signal-ink); }
+
+/* toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  translate: -50% 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 8px 8px 8px 16px;
+  border-radius: var(--r-m);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+  font-weight: 520;
+  z-index: 50;
+  animation: rise 180ms var(--ease);
+}
+.toast .btn { background: transparent; color: var(--signal); border-color: transparent; }
+.toast[hidden] { display: none; }
+
+@keyframes rise { from { opacity: 0; translate: -50% 8px; } }
+@keyframes drop-in { from { opacity: 0; transform: translateY(-6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
